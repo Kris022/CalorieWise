@@ -15,10 +15,12 @@ Tech Stack:
 - Database: MongoDB
 
 Web App:
-1. Clone the repository: `git clone https://github.com/your-username/CalorieWise.git`
-2. Install dependencies: `npm install`
-3. Start the development server: `npm start`
-4. Open your browser and navigate to http://localhost:3000/ to access the web app.
+Soon to be deployed.
 
-Mobile App (Coming Soon):
-Stay tuned for the CalorieWise mobile app! It will be available for both iOS and Android platforms. Monitor your calorie intake on the go and keep track of your health goals wherever you are.
+To run the code
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Navigate to localhost
+
+Mobile App (Coming Soon)

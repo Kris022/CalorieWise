@@ -1,3 +1,4 @@
+import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -11,29 +12,30 @@ export default function CalorieSummary() {
   const percentage = Math.floor((dailyCalories / calorieGoal) * 100);
 
   return (
-    <div className="card flex">
-      <div className="flex flex-col items-center">
-        <div style={{ width: 100 }}>
+    <div className="max-w-sm bg-white p-4 m-4 sm:flex sm:justify-center rounded-lg shadow-md">
+      <div className="flex justify-center mb-4 sm:mb-0">
+        <div style={{ width: 130 }}>
           <CircularProgressbar
             value={percentage}
-            text={`${remainingCalories} kcal left`}
+            text={`${remainingCalories} kcal`}
             styles={buildStyles({
               textSize: "14px",
-
               // Colors
               pathColor: `#34c734`,
               textColor: "#131413",
               trailColor: "#d6d6d6",
-              backgroundColor: "#4BC0C0BE",
+              backgroundColor: "#f3f3f3",
             })}
           />
         </div>
       </div>
 
-      <div className="flex flex-col ml-8 justify-center">
-        <h2 className="text-xl font-semibold mb-2">Calorie Summary</h2>
-        <p className="text-gray-700">Caloric Goal: {calorieGoal} kcal</p>
-        <p className="text-gray-700">Calories Consumed: {dailyCalories} kcal</p>
+      <div className="text-lg sm:text-base sm:flex sm:flex-col sm:justify-center sm:ml-4">
+        <h2 className="text-center sm:text-left font-semibold">Calorie Summary</h2>
+        <div className="mt-2 text-center sm:text-left text-gray-700">
+          <p>Caloric Goal: {calorieGoal} kcal</p>
+          <p>Calories Consumed: {dailyCalories} kcal</p>
+        </div>
       </div>
     </div>
   );

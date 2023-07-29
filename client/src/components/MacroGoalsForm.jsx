@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-export default function ConfirmMacrosForm({ onSubmit }) {
-  const [caloricGoal, setCaloricGoal] = useState('');
-  const [proteinGoal, setProteinGoal] = useState('');
-  const [carbohydrateGoal, setCarbohydrateGoal] = useState('');
-  const [fatGoal, setFatGoal] = useState('');
+export default function MacroGoalsForm({ onSubmit }) {
+  const [caloricGoal, setCaloricGoal] = useState("");
+  const [proteinGoal, setProteinGoal] = useState("");
+  const [carbohydrateGoal, setCarbohydrateGoal] = useState("");
+  const [fatGoal, setFatGoal] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,9 +28,13 @@ export default function ConfirmMacrosForm({ onSubmit }) {
 
   return (
     <form className="card" onSubmit={handleSubmit}>
-      <h2 className="text-xl font-semibold mb-4">Set Caloric and Macros Goals</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        Set Caloric and Macros Goals
+      </h2>
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">Caloric Goal</label>
+        <label className="block text-gray-700 font-semibold">
+          Caloric Goal
+        </label>
         <input
           type="number"
           value={caloricGoal}
@@ -41,7 +45,9 @@ export default function ConfirmMacrosForm({ onSubmit }) {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">Protein Goal (g)</label>
+        <label className="block text-gray-700 font-semibold">
+          Protein Goal (g)
+        </label>
         <input
           type="number"
           value={proteinGoal}
@@ -52,7 +58,9 @@ export default function ConfirmMacrosForm({ onSubmit }) {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">Carbohydrate Goal (g)</label>
+        <label className="block text-gray-700 font-semibold">
+          Carbohydrate Goal (g)
+        </label>
         <input
           type="number"
           value={carbohydrateGoal}
@@ -63,7 +71,9 @@ export default function ConfirmMacrosForm({ onSubmit }) {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">Fat Goal (g)</label>
+        <label className="block text-gray-700 font-semibold">
+          Fat Goal (g)
+        </label>
         <input
           type="number"
           value={fatGoal}
@@ -73,12 +83,14 @@ export default function ConfirmMacrosForm({ onSubmit }) {
           required
         />
       </div>
-      <button
-        type="submit"
-        className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-      >
-        Set Goals
-      </button>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+        >
+          Set Goals
+        </button>
+      </div>
     </form>
   );
 }

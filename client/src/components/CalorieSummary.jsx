@@ -12,7 +12,7 @@ export default function CalorieSummary() {
   const percentage = Math.floor((dailyCalories / calorieGoal) * 100);
 
   return (
-    <div className="max-w-sm bg-white p-4 m-4 sm:flex sm:justify-center rounded-lg shadow-md">
+    <div className="card sm:flex sm:justify-center rounded-lg shadow-md">
       <div className="flex justify-center mb-4 sm:mb-0">
         <div style={{ width: 130 }}>
           <CircularProgressbar

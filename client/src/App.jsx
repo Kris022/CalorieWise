@@ -12,7 +12,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div>
-        {/* <Navbar /> */}
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />

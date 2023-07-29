@@ -2,24 +2,36 @@ import React, { useState } from "react";
 import SignupForm from "../components/SignupForm";
 import MacroGoalsForm from "../components/MacroGoalsForm";
 
+import { useNavigate } from "react-router-dom"; // Import useHistory from react-router-dom
+
 import { motion } from "framer-motion";
 
 export default function SignupPage() {
   const [showConfirmMacrosForm, setShowConfirmMacrosForm] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignupFormSubmit = () => {
     setShowConfirmMacrosForm(true);
   };
 
-  return (
-    <div className="min-h-screen bg-green-200 flex justify-center items-center">
-      <div className="flex flex-col items-center">
-        {!showConfirmMacrosForm && (
-          <SignupForm onSignup={handleSignupFormSubmit} />
-        )}
+  const handleMacroGoalsFormSubmit = () => {
+    // go to /dashboard
+    navigate('/dashboard')
+  };
 
-        <div>{showConfirmMacrosForm && <MacroGoalsForm />}</div>
-      </div>
+  return (
+    <div className="w-full flex justify-center items-center">
+      {!showConfirmMacrosForm && (
+        <div className="w-full flex justify-center">
+          <SignupForm onSignup={handleSignupFormSubmit} />
+        </div>
+      )}
+
+      {showConfirmMacrosForm && (
+        <div className="w-full flex justify-center">
+          <MacroGoalsForm onSubmit={handleMacroGoalsFormSubmit} />
+        </div>
+      )}
     </div>
   );
 }

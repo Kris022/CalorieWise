@@ -23,11 +23,11 @@ export default function MacroGoalsForm({ onSubmit }) {
     };
 
     // Call the onSubmit function from the parent component with the user's goals
-    onSubmit(userGoals);
+    onSubmit();
   };
 
   return (
-    <form className="card" onSubmit={handleSubmit}>
+    <form className="card w-full mt-8" onSubmit={handleSubmit}>
       <h2 className="text-xl font-semibold mb-4">
         Set Caloric and Macros Goals
       </h2>

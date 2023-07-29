@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CalorieForm = () => {
+export default function UserCalorieIntakeForm() {
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
@@ -21,7 +21,7 @@ const CalorieForm = () => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md w-96">
+    <div className="card">
       <h2 className="text-3xl font-semibold text-center mb-6">Enter Calorie Information</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -104,4 +104,3 @@ const CalorieForm = () => {
   );
 };
 
-export default CalorieForm;

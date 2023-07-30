@@ -7,25 +7,29 @@ import SelectFoodForm from "../components/SelectFoodForm";
 import FoodBrowser from "../components/FoodBrowser";
 import LogFoodForm from "../components/LogFoodForm"; // Import the LogFoodForm component
 
-import FormSwitcher from "../components/FormSwitcher";
+import { fetchAllFoods } from "../services/foodApi";
 
 export default function DashboardPage() {
-  // State to manage whether LogFoodForm should be shown as modal or not
-  const [showLogFoodModal, setShowLogFoodModal] = useState(false);
+  const [foodsData, setFoodsData] = useState([]);
 
-  // Function to handle the click of the Log Meal button
-  const handleLogMealClick = () => {
-    setShowLogFoodModal(true); // Show the LogFoodForm as a modal on mobile
-  };
+  useEffect(() => {
+    const fetchMyData = async () => {
+      try {
+        const responseData = await fetchAllFoods();
+        setFoodsData(responseData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchMyData();
+  }, []);
 
-  // Close the modal when the form is submitted or canceled
-  const closeModal = () => {
-    setShowLogFoodModal(false);
-  };
+  if (foodsData) {
+    console.log(foodsData);
+  }
 
   return (
     <div className="flex flex-col sm:flex-row sm:p-2 ">
-      
       <div className="hidden sm:flex flex-1 p-4"></div>
 
       <div className="flex flex-col sm:max-h-96">
@@ -42,7 +46,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="flex max-h-64 sm:max-h-96 mt-2 flex-grow sm:ml-2">
-        <FoodBrowser />
+        <FoodBrowser foodsData={foodsData} />
       </div>
 
       <div className="sm:hidden mt-2 flex flex-1 justify-center items-center p-4 ">

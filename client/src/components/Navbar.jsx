@@ -16,7 +16,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-green-600 p-4">
+    <nav className="bg-green-600 p-4 sticky top-0 z-10">
       <div className="flex justify-between items-center">
         <Link to="/" className="text-white text-xl font-bold">
           CalorieWise

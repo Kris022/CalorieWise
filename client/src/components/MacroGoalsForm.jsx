@@ -27,7 +27,7 @@ export default function MacroGoalsForm({ onSubmit }) {
   };
 
   return (
-    <form className="card w-full mt-8" onSubmit={handleSubmit}>
+    <form className="w-full" onSubmit={handleSubmit}>
       <h2 className="text-xl font-semibold mb-4">
         Set Caloric and Macros Goals
       </h2>

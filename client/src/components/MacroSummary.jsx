@@ -2,9 +2,9 @@ import { FaWheatAwn } from "react-icons/fa6";
 import { MdEggAlt } from "react-icons/md";
 import { PiFishSimpleFill } from "react-icons/pi";
 
-export default function DailyMacrosInfo({ proteins, carbohydrates, fats }) {
+export default function MacroSummary({ proteins, carbohydrates, fats }) {
   return (
-    <div className="card">
+    <div className="rounded-lg shadow-md p-4 bg-white">
       <h2 className="text-xl font-semibold mb-4">Daily Macros Info</h2>
       <div className="grid grid-cols-3 gap-4">
         

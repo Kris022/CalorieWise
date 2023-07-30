@@ -38,7 +38,7 @@ export default function LogFoodForm({ onClose }) {
 
   return (
     <form
-      className="w-full sm:w-auto bg-white p-4 rounded-lg shadow-md"
+    className="w-full"
       onSubmit={handleSubmit}
     >
       <div className="flex justify-between">

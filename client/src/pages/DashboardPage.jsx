@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CalorieSummary from "../components/CalorieSummary";
-import DailyMacrosInfo from "../components/DailyMacrosInfo";
+import MacroSummary from "../components/MacroSummary";
 import LogMealButton from "../components/LogMealButton";
 import SelectFoodForm from "../components/SelectFoodForm";
 import FoodBrowser from "../components/FoodBrowser";
 import LogFoodForm from "../components/LogFoodForm"; // Import the LogFoodForm component
+
+import FormSwitcher from "../components/FormSwitcher";
 
 export default function DashboardPage() {
   // State to manage whether LogFoodForm should be shown as modal or not
@@ -22,51 +24,32 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="w-full h-screen">
-      <div className="flex flex-col sm:items-center h-full mt-10">
-        <div>
-          {/* Calorie Summary */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <CalorieSummary />
-          </motion.div>
+    <div className="flex flex-col sm:flex-row sm:p-2 ">
+      
+      <div className="hidden sm:flex flex-1 p-4"></div>
 
-          {/* Daily Macros */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <DailyMacrosInfo />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="mt-4"
-          >
-            {/* Render LogMealButton with onClick handler */}
-            <LogMealButton onClick={handleLogMealClick} />
-          </motion.div>
+      <div className="flex flex-col sm:max-h-96">
+        <div className="mt-2">
+          <CalorieSummary />
         </div>
+        <div className="mt-2">
+          <MacroSummary />
+        </div>
+
+        <button className="hidden sm:block sm:mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded">
+          Quick Log
+        </button>
       </div>
 
-      {/* Conditionally render LogFoodForm as a modal or inline */}
-      {showLogFoodModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
-        >
-          {/* Render LogFoodForm as a modal */}
-          <LogFoodForm onClose={closeModal} />
-        </motion.div>
-      )}
+      <div className="flex max-h-64 sm:max-h-96 mt-2 flex-grow sm:ml-2">
+        <FoodBrowser />
+      </div>
+
+      <div className="sm:hidden mt-2 flex flex-1 justify-center items-center p-4 ">
+        <button className="bg-green-500 w-full hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Quick Log
+        </button>
+      </div>
     </div>
   );
 }

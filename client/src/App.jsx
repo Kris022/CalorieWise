@@ -11,7 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 export default function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="h-full">
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />

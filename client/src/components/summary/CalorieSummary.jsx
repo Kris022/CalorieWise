@@ -2,10 +2,12 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export default function CalorieSummary() {
-  // Dummy data for daily calorie intake and calorie goal
+export default function CalorieSummary({ calories }) {
+  // Dummy data for calorie goal
   const calorieGoal = 2000;
-  const dailyCalories = 1200;
+
+  // Parse the prop to int
+  const dailyCalories = Number.isNaN(parseInt(calories)) ? 0 : parseInt(calories);
 
   // Calculate the remaining calories
   const remainingCalories = calorieGoal - dailyCalories;
@@ -35,6 +37,7 @@ export default function CalorieSummary() {
         <div className="mt-2 text-center sm:text-left text-gray-700">
           <p>Caloric Goal: {calorieGoal} kcal</p>
           <p>Calories Consumed: {dailyCalories} kcal</p>
+          <p>Calories Left: {remainingCalories} kcal</p>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { FaWheatAwn } from "react-icons/fa6";
 import { MdEggAlt } from "react-icons/md";
 import { PiFishSimpleFill } from "react-icons/pi";
 
-export default function MacroSummary({ proteins, carbohydrates, fats }) {
+export default function MacroSummary({ macros }) {
   return (
     <div className="rounded-lg shadow-md p-4 bg-white h-full">
       <div className="h-full flex items-center">
@@ -26,13 +26,13 @@ export default function MacroSummary({ proteins, carbohydrates, fats }) {
 
           <div className="grid grid-cols-3 gap-4 mt-1">
             <div>
-              <p className="text-gray-700">{proteins} g</p>
+              <p className="text-gray-700">{macros.protein} g</p>
             </div>
             <div>
-              <p className="text-gray-700">{carbohydrates} g</p>
+              <p className="text-gray-700">{macros.carbs} g</p>
             </div>
             <div>
-              <p className="text-gray-700">{fats} g</p>
+              <p className="text-gray-700">{macros.fats} g</p>
             </div>
           </div>
         </div>

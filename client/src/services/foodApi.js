@@ -1,5 +1,7 @@
 const BASE_URL = "http://localhost:4000/";
 
+// put all of the calcualtion logic here
+
 export const fetchAllFoods = async () => {
   const res = await fetch(`${BASE_URL}api/foods/`);
   const json = await res.json();

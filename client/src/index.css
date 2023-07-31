@@ -18,3 +18,7 @@ body {
     @apply px-4
   }
 }
+
+.card {
+  @apply rounded-lg shadow-md p-4 bg-white
+}

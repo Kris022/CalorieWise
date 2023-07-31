@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function LogFoodForm({ onClose }) {
+export default function AddFoodForm() {
   const [mealName, setMealName] = useState("");
   const [calories, setCalories] = useState("");
   const [proteins, setProteins] = useState("");
@@ -25,6 +25,7 @@ export default function LogFoodForm({ onClose }) {
       //   carbohydrates: carbohydratesValue,
       //   fats: fatsValue,
       // });
+      
       // Reset form fields
       setMealName("");
       setCalories("");
@@ -32,18 +33,18 @@ export default function LogFoodForm({ onClose }) {
       setCarbohydrates("");
       setFats("");
 
-      onClose();
+      // onClose();
     }
   };
 
   return (
     <form
-    className="w-full"
+    className="card sm:max-w-3xl"
       onSubmit={handleSubmit}
     >
       <div className="flex justify-between">
         <h2 className="text-xl font-semibold">Add new food</h2>
-        <button onClick={onClose}>Close</button>
+        <button>Close</button>
       </div>
 
       <div className="mb-4">

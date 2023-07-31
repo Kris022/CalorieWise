@@ -1,6 +1,6 @@
 import { useState } from "react";
-import UserCalorieIntakeForm from "../components/UserCalorieIntakeForm";
-import UserProfileForm from "../components/UserProfileForm";
+import UserCalorieIntakeForm from "../components/userForms/UserCalorieIntakeForm";
+import UserProfileForm from "../components/userForms/UserProfileForm";
 
 export default function ProfilePage() {
   const [user, setUser] = useState({

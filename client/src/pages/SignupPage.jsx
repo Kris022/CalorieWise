@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignupForm from "../components/SignupForm";
+import SignupForm from "../components/userForms/SignupForm";
 import MacroGoalsForm from "../components/MacroGoalsForm";
 
 import { useNavigate } from "react-router-dom"; // Import useHistory from react-router-dom

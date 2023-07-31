@@ -1,5 +1,5 @@
 import React from "react";
-import FoodCard from "./FoodCard";
+import FoodCard from "./foodCard/FoodCard";
 
 const foodsData = [
   {

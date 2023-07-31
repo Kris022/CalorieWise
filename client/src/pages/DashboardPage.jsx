@@ -10,7 +10,7 @@ import FoodBrowser from "../components/FoodBrowser";
 
 import Modal from "../components/modal/Modal";
 
-import { fetchAllFoods } from "../services/foodApi";
+import { fetchAllFoods, createFood } from "../services/foodApi";
 
 export default function DashboardPage() {
   const [foodsData, setFoodsData] = useState([]);
@@ -37,7 +37,7 @@ export default function DashboardPage() {
     <div className=" w-full h-[91vh] top-[60px]">
       <div className={foodFormVisible ? "block" : "hidden"}>
         <Modal handleClose={toggleModal}>
-          <AddFoodForm />
+          <AddFoodForm onSubmitFood={createFood} onClose={toggleModal} />
         </Modal>
       </div>
 
@@ -59,6 +59,7 @@ export default function DashboardPage() {
           <div className="flex-1 p-1">
             {/* Goal heatmap */}
             <CalorieSummary />
+            
           </div>
 
           {/* Quick Log Button */}

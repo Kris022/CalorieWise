@@ -25,10 +25,10 @@ const getFoodById = async (req, res) => {
 };
 
 const createFood = async (req, res) => {
-  const { name, calories, protein, carbs, fats } = req.body;
+  const { name, calories, amount, protein, carbs, fats } = req.body;
 
   try {
-    const food = await Food.create({ name, calories, protein, carbs, fats });
+    const food = await Food.create({ name, calories, amount, protein, carbs, fats });
     res.status(201).json(food);
   } catch (error) {
     res.status(400).json({ error: error.message });

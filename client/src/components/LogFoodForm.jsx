@@ -1,8 +1,11 @@
 import { useState } from "react";
 
-export default function AddFoodForm() {
-  const [mealName, setMealName] = useState("");
+
+
+export default function AddFoodForm({onSubmitFood, onClose}) {
+  const [foodName, setFoodName] = useState("");
   const [calories, setCalories] = useState("");
+  const [amount, setAmount] = useState("");
   const [proteins, setProteins] = useState("");
   const [carbohydrates, setCarbohydrates] = useState("");
   const [fats, setFats] = useState("");
@@ -10,49 +13,51 @@ export default function AddFoodForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if mealName and calories are not empty
-    if (mealName.trim() !== "" && calories.trim() !== "") {
+    // Check if foodName and calories are not empty
+    if (foodName.trim() !== "" && calories.trim() !== "") {
       // Convert calories, proteins, carbohydrates, and fats to numbers
       const caloriesValue = parseInt(calories, 10);
+      const amountValue = parseInt(amount, 10);
       const proteinsValue = parseInt(proteins, 10);
       const carbohydratesValue = parseInt(carbohydrates, 10);
       const fatsValue = parseInt(fats, 10);
+
       // Call the onLogCalories function from the parent component with the meal details
-      // onLogCalories({
-      //   mealName,
-      //   calories: caloriesValue,
-      //   proteins: proteinsValue,
-      //   carbohydrates: carbohydratesValue,
-      //   fats: fatsValue,
-      // });
-      
+      const food = {
+        name: foodName,
+        calories: caloriesValue,
+        amount: amountValue,
+        protein: proteinsValue,
+        carbs: carbohydratesValue,
+        fats: fatsValue,
+      };
+
+      onSubmitFood(food);
+
       // Reset form fields
-      setMealName("");
+      setFoodName("");
       setCalories("");
       setProteins("");
       setCarbohydrates("");
       setFats("");
 
-      // onClose();
+      onClose();
     }
   };
 
   return (
-    <form
-    className="card sm:max-w-3xl"
-      onSubmit={handleSubmit}
-    >
+    <form className="card sm:max-w-3xl" onSubmit={handleSubmit}>
       <div className="flex justify-between">
         <h2 className="text-xl font-semibold">Add new food</h2>
-        <button>Close</button>
+        <button onClick={onClose}>Close</button>
       </div>
 
       <div className="mb-4">
         <label className="block text-gray-700 font-semibold">Food Name</label>
         <input
           type="text"
-          value={mealName}
-          onChange={(e) => setMealName(e.target.value)}
+          value={foodName}
+          onChange={(e) => setFoodName(e.target.value)}
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="E.g. Peanut butter"
           required
@@ -76,8 +81,8 @@ export default function AddFoodForm() {
           <label className="block text-gray-700 font-semibold">Grams</label>
           <input
             type="number"
-            value={calories}
-            onChange={(e) => setCalories(e.target.value)}
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
             className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
             placeholder="Per grams"
             required

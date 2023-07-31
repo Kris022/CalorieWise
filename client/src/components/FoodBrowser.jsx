@@ -11,16 +11,6 @@ const foodsData = [
     fat: 3,
   },
   { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
-  { id: 2, name: "Salmon", calories: 220, protein: 20, carbs: 0, fat: 15 },
   { id: 3, name: "Brown Rice", calories: 100, protein: 2, carbs: 22, fat: 1 },
   // Add more food items here as needed
 ];

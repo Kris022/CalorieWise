@@ -10,6 +10,9 @@ const foodSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  amount: {
+    type: Number,
+  },
   protein: {
     type: Number,
     required: true,

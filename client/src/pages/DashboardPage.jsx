@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import { motion } from "framer-motion";
+
 import CalorieSummary from "../components/CalorieSummary";
 import MacroSummary from "../components/MacroSummary";
-import LogMealButton from "../components/LogMealButton";
+
 import SelectFoodForm from "../components/SelectFoodForm";
 import FoodBrowser from "../components/FoodBrowser";
-import LogFoodForm from "../components/LogFoodForm"; // Import the LogFoodForm component
 
 import { fetchAllFoods } from "../services/foodApi";
 
@@ -21,38 +22,57 @@ export default function DashboardPage() {
         console.error("Error fetching data:", error);
       }
     };
-    fetchMyData();
+
+    // fetchMyData();
   }, []);
 
-  if (foodsData) {
-    console.log(foodsData);
-  }
-
   return (
-    <div className="flex flex-col sm:flex-row sm:p-2 ">
-      <div className="hidden sm:flex flex-1 p-4"></div>
-
-      <div className="flex flex-col sm:max-h-96">
-        <div className="mt-2">
-          <CalorieSummary />
-        </div>
-        <div className="mt-2">
-          <MacroSummary />
+    <div className=" w-full h-[91vh] top-[60px]">
+      {/* Page wrapper */}
+      <div className=" max-w-7xl mx-auto p-4  ">
+        {/* Page title */}
+        <div className="hidden sm:block sm:p-4">
+          <h2 className="text-gray-900 text-xl ">Analytics</h2>
         </div>
 
-        <button className="hidden sm:block sm:mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded">
-          Quick Log
-        </button>
-      </div>
+        {/* Section 1 contents wraper */}
+        <div className="flex flex-col sm:flex-row  ">
+          <div className="  p-1">
+            <CalorieSummary />
+          </div>
+          <div className="p-1">
+            <MacroSummary />
+          </div>
+          <div className="flex-1 p-1">
+            <CalorieSummary />
+          </div>
 
-      <div className="flex max-h-64 sm:max-h-96 mt-2 flex-grow sm:ml-2">
-        <FoodBrowser foodsData={foodsData} />
-      </div>
+          <div className="sm:hidden m-1">
+            <button className="bg-green-600 text-white w-full px-2 py-3 text-2xl rounded-md font-semibold">Quick Log</button>
+          </div>
+        </div>
 
-      <div className="sm:hidden mt-2 flex flex-1 justify-center items-center p-4 ">
-        <button className="bg-green-500 w-full hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-          Quick Log
-        </button>
+        {/* Section 2 wrapper */}
+        <div className="hidden sm:flex border-red-700 p-2 mt-4">
+
+          <div className="flex-1">
+            <div>
+              <h2 className="text-xl  mb-4">Food Today</h2>
+            </div>
+            <FoodBrowser />
+          </div>
+
+          <div className="flex-1">
+            <div>
+              <h2 className="text-xl  mb-4">Meals Today</h2>
+            </div>
+            <FoodBrowser />
+          </div>
+
+        </div>
+
+        
+        
       </div>
     </div>
   );

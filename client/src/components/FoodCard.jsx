@@ -4,7 +4,7 @@ const FoodCard = ({ food }) => {
   const { name, protein, carbs, fats } = food;
 
   return (
-    <div className="card">
+    <div className="">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-xl font-semibold">{name}</h3>
         <button

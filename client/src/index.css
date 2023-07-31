@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* --color-name: value; */
+}
+
 body {
-  background-color: rgb(243 244 246);
+  background-color: #f3f4f6;
 }
 
-/* Hide the default scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  background-color: transparent;
-}
-
-/* Style the scrollbar thumb for Chrome and Safari */
-::-webkit-scrollbar-thumb {
-  background-color: #4caf50;
-  border-radius: 5px;
+@layer base {
+  h1 {
+    @apply text-xl font-bold
+  }
+  li {
+    @apply px-4
+  }
 }

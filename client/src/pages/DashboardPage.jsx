@@ -19,6 +19,7 @@ export default function DashboardPage() {
   const [foodsData, setFoodsData] = useState([]);
   const [foodFormVisible, setFoodFormVisible] = useState(false); // Change to quick log form?
   const [totalMacros, setTotalMacros] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(getCurrentDate());
 
 
   // Toggles modal visiblity
@@ -50,9 +51,8 @@ export default function DashboardPage() {
     }
   };
 
-
   const fetchFoodForToday = async () => {
-    const currentDate = getCurrentDate();
+    const currentDate = selectedDate;
 
     try {
       const res = await fetch(`${BASE_URL}api/foods/${currentDate}`); // Assuming the backend endpoint is /api/foods
@@ -65,7 +65,7 @@ export default function DashboardPage() {
     }
   };
 
-  // Logs food to teh database
+  // Logs food to the database
   const submitFood = async (food) => {
     const res = await fetch(`${BASE_URL}api/foods/`, {
       method: "POST",
@@ -82,14 +82,36 @@ export default function DashboardPage() {
     }
 
     if (res.ok) {
-      fetchFoodData();
+      fetchFoodForToday();
+    }
+  };
+
+  // Logs food to the database
+  const deleteFood = async (food) => {
+    const res = await fetch(`${BASE_URL}api/foods/` + food._id, {
+      method: "DELETE",
+      body: JSON.stringify(food),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await res.json();
+
+    if (!res.ok) {
+      console.log(json);
+    }
+
+    if (res.ok) {
+      fetchFoodForToday();
     }
   };
 
   useEffect(() => {
     // fetchAllFoodData();
     fetchFoodForToday();
-  }, []);
+  }, [selectedDate]);
+  // Add selected date to the list of dependencies
 
   return (
     <div className=" w-full h-[91vh] top-[60px]">
@@ -183,7 +205,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-xl  mb-4">What you ate today:</h2>
             </div>
-            <FoodBrowser foodsData={foodsData} />
+            <FoodBrowser foodsData={foodsData} deleteFood={deleteFood} />
           </motion.div>
 
           <motion.div
@@ -197,6 +219,7 @@ export default function DashboardPage() {
             </div>
             <div>
               {/* <CalorieCalendar /> */}
+              <CalorieCalendar setSelectedDate={setSelectedDate} />
             </div>
             {/* Quick Log Button */}
             <motion.div

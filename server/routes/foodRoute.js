@@ -7,6 +7,7 @@ const {
   createFood,
   updateFood,
   deleteFood,
+  getFoodsByDate,
 } = require("../controllers/foodController");
 
 // Endpoints
@@ -15,14 +16,16 @@ const {
 router.get("/", getAllFoods);
 
 // GET a specific food by its ID
-router.get("/:foodId", getFoodById);
+// router.get("/:foodId", getFoodById);
+
+// GET foods for specific date
+router.get("/:date", getFoodsByDate);
 
 // POST a new food
 router.post("/", createFood);
 
-// PUT/PATCH update a specific food by its ID
+// PUT updates a specific food by its ID
 router.put("/:foodId", updateFood);
-// Alternatively, you can use "patch" instead of "put" if you want to partially update the food.
 
 // DELETE a specific food by its ID
 router.delete("/:foodId", deleteFood);

@@ -6,6 +6,27 @@ const getAllFoods = async (req, res) => {
   res.status(200).json(foods);
 };
 
+const getFoodsByDate = async (req, res) => {
+  const dateString = req.params.date;
+  const date = new Date(dateString);
+
+  try {
+    // Set the end date to the next day to include the entire day in the query
+    const nextDay = new Date(date);
+    nextDay.setDate(date.getDate() + 1);
+
+    const foods = await Food.find({
+      date: {
+        $gte: date,
+        $lt: nextDay,
+      },
+    });
+    res.status(200).json(foods);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const getFoodById = async (req, res) => {
   const { foodId } = req.params;
 
@@ -25,10 +46,18 @@ const getFoodById = async (req, res) => {
 };
 
 const createFood = async (req, res) => {
-  const { name, calories, amount, protein, carbs, fats } = req.body;
+  const { name, calories, date, amount, protein, carbs, fats } = req.body;
 
   try {
-    const food = await Food.create({ name, calories, amount, protein, carbs, fats });
+    const food = await Food.create({
+      name,
+      calories,
+      date,
+      amount,
+      protein,
+      carbs,
+      fats,
+    });
     res.status(201).json(food);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -43,7 +72,11 @@ const updateFood = async (req, res) => {
   }
 
   try {
-    const updatedFood = await Food.findByIdAndUpdate(foodId, { ...req.body }, { new: true });
+    const updatedFood = await Food.findByIdAndUpdate(
+      foodId,
+      { ...req.body },
+      { new: true }
+    );
     if (!updatedFood) {
       return res.status(404).json({ error: "Food not found." });
     }
@@ -73,6 +106,7 @@ const deleteFood = async (req, res) => {
 
 module.exports = {
   getAllFoods,
+  getFoodsByDate,
   getFoodById,
   createFood,
   updateFood,

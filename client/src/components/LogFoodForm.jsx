@@ -1,14 +1,16 @@
 import { useState } from "react";
 
+import { getCurrentDate } from "../utils/utils";
 
-
-export default function AddFoodForm({onSubmitFood, onClose}) {
+export default function AddFoodForm({ onSubmitFood, onClose }) {
   const [foodName, setFoodName] = useState("");
   const [calories, setCalories] = useState("");
   const [amount, setAmount] = useState("");
   const [proteins, setProteins] = useState("");
   const [carbohydrates, setCarbohydrates] = useState("");
   const [fats, setFats] = useState("");
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,10 +24,13 @@ export default function AddFoodForm({onSubmitFood, onClose}) {
       const carbohydratesValue = parseInt(carbohydrates, 10);
       const fatsValue = parseInt(fats, 10);
 
+      const curDate = getCurrentDate();
+
       // Call the onLogCalories function from the parent component with the meal details
       const food = {
         name: foodName,
         calories: caloriesValue,
+        date: curDate,
         amount: amountValue,
         protein: proteinsValue,
         carbs: carbohydratesValue,

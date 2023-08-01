@@ -11,25 +11,23 @@ import FoodBrowser from "../components/FoodBrowser";
 
 import Modal from "../components/modal/Modal";
 
-import { fetchAllFoods, createFood } from "../services/foodApi";
+import { getCurrentDate, calculateSum } from "../utils/utils";
 
 const BASE_URL = "http://localhost:4000/";
 
 export default function DashboardPage() {
   const [foodsData, setFoodsData] = useState([]);
-  const [foodFormVisible, setFoodFormVisible] = useState(false);
+  const [foodFormVisible, setFoodFormVisible] = useState(false); // Change to quick log form?
   const [totalMacros, setTotalMacros] = useState([]);
 
-  const calculateSum = (property, data) => {
-    const sum = data.reduce((acc, food) => acc + food[property], 0);
-    return sum;
-  };
 
+  // Toggles modal visiblity
   const toggleModal = () => {
     setFoodFormVisible(!foodFormVisible);
   };
 
-  const updateFoodData = (data) => {
+  // updates the local foods data and total macros state
+  const updateLocalFoodData = (data) => {
     setFoodsData(data);
     setTotalMacros({
       calories: calculateSum("calories", data),
@@ -39,18 +37,35 @@ export default function DashboardPage() {
     });
   };
 
-  const fetchFoodData = async () => {
+  // Fetches the food data from database
+  const fetchAllFoodData = async () => {
     const res = await fetch(`${BASE_URL}api/foods/`);
     const json = await res.json();
 
     if (res.ok) {
-      updateFoodData(json);
+      updateLocalFoodData(json);
     }
     if (!res.ok) {
       console.error("Error fetching data:", error);
     }
   };
 
+
+  const fetchFoodForToday = async () => {
+    const currentDate = getCurrentDate();
+
+    try {
+      const res = await fetch(`${BASE_URL}api/foods/${currentDate}`); // Assuming the backend endpoint is /api/foods
+      const data = await res.json();
+
+      updateLocalFoodData(data);
+
+    } catch (error) {
+      console.error("Error fetching food for today:", error);
+    }
+  };
+
+  // Logs food to teh database
   const submitFood = async (food) => {
     const res = await fetch(`${BASE_URL}api/foods/`, {
       method: "POST",
@@ -67,13 +82,13 @@ export default function DashboardPage() {
     }
 
     if (res.ok) {
-      // return data
       fetchFoodData();
     }
   };
 
   useEffect(() => {
-    fetchFoodData();
+    // fetchAllFoodData();
+    fetchFoodForToday();
   }, []);
 
   return (
@@ -84,66 +99,122 @@ export default function DashboardPage() {
         </Modal>
       </div>
 
+
       {/* Page wrapper */}
-      <div className=" max-w-7xl mx-auto p-4  ">
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+        animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+        transition={{ duration: 0.5 }} // Animation duration
+        className="max-w-7xl mx-auto p-4"
+      >
         {/* Page title */}
-        <div className="hidden sm:block sm:p-4">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+          animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+          transition={{ duration: 0.5 }} // Animation duration
+          className="hidden sm:block sm:p-4"
+        >
           <h2 className="text-gray-900 text-xl ">Analytics</h2>
-        </div>
+        </motion.div>
 
         {/* Section 1 contents wraper */}
-        <div className="flex flex-col sm:flex-row  ">
-          <div className="p-1">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+          animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+          transition={{ duration: 0.5 }} // Animation duration
+          className="flex flex-col sm:flex-row"
+        >
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+            transition={{ duration: 0.5 }} // Animation duration
+            className="p-1"
+          >
             <CalorieSummary calories={totalMacros.calories} />
-          </div>
-          <div className="p-1">
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+            transition={{ duration: 0.5 }} // Animation duration
+            className="p-1"
+          >
             <MacroSummary macros={totalMacros} />
-          </div>
-          <div className="flex-1 p-1">
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+            transition={{ duration: 0.5 }} // Animation duration
+            className="flex-1 p-1"
+          >
             {/* Goal heatmap */}
             {/* Calorie summary but weekly */}
             <CalorieSummary />
-          </div>
+          </motion.div>
 
           {/* Quick Log Button */}
-          <div className="sm:hidden">
-            <button
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+            transition={{ duration: 0.5 }} // Animation duration
+            className="sm:hidden"
+          >
+            <motion.button
               onClick={toggleModal}
               className="bg-green-600 text-white w-full px-2 py-3 text-2xl rounded-md font-semibold"
             >
               Quick Log
-            </button>
-          </div>
-        </div>
+            </motion.button>
+          </motion.div>
+        </motion.div>
 
         {/* Section 2 wrapper */}
-        <div className="hidden sm:flex border-red-700 p-2 mt-4">
-          <div className="flex-1">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+          animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+          transition={{ duration: 0.5 }} // Animation duration
+          className="hidden sm:flex border-red-700 p-2 mt-4"
+        >
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+            transition={{ duration: 0.5 }} // Animation duration
+            className="flex-1"
+          >
             <div>
               <h2 className="text-xl  mb-4">What you ate today:</h2>
             </div>
             <FoodBrowser foodsData={foodsData} />
-          </div>
+          </motion.div>
 
-          <div className="flex-1">
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+            transition={{ duration: 0.5 }} // Animation duration
+            className="flex-1"
+          >
             <div>
               <h2 className="text-xl  mb-4">Meals Today</h2>
             </div>
             <div>
-              <CalorieCalendar />
+              {/* <CalorieCalendar /> */}
             </div>
             {/* Quick Log Button */}
-            <div className="sm:block">
-              <button
+            <motion.div
+              className="sm:block"
+              initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
+              animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
+              transition={{ duration: 0.5 }} // Animation duration
+            >
+              <motion.button
                 onClick={toggleModal}
                 className="bg-green-600 text-white w-full px-2 py-3 text-2xl rounded-md font-semibold"
               >
                 Quick Log
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </div>
   );
-}
+};

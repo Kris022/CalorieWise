@@ -1,44 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCurrentDate } from "../utils/utils";
 
-export default function AddFoodForm({ onSubmitFood, onClose }) {
+export default function AddFoodForm({ foodsData, foodCardIndex, onSubmitFood, onClose, visible }) {
   const initialFormData = {
-    foodName: "",
+    id: 0,
+    name: "",
     calories: "",
     amount: "",
-    proteins: "",
-    carbohydrates: "",
+    protein: "",
+    carbs: "",
     fats: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    if (foodCardIndex != -1) {
+      setFormData(foodsData[foodCardIndex]);
+    } else {
+      setFormData(initialFormData);
+    }
+  }, [visible])
 
   // Add a select field that allows to choose existing food
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if foodName and calories are not empty
-    if (formData.foodName.trim() !== "" && formData.calories.trim() !== "") {
-      // Convert calories, proteins, carbohydrates, and fats to numbers
-      const caloriesValue = parseInt(formData.calories, 10);
-      const amountValue = parseInt(formData.amount, 10);
-      const proteinsValue = parseInt(formData.proteins, 10);
-      const carbohydratesValue = parseInt(formData.carbohydrates, 10);
-      const fatsValue = parseInt(formData.fats, 10);
-
       const curDate = getCurrentDate();
 
-      // Call the onLogCalories function from the parent component with the meal details
       const food = {
-        name: formData.foodName,
+        name: formData.name,
         calories: caloriesValue,
         date: curDate,
         amount: amountValue,
         protein: proteinsValue,
         carbs: carbohydratesValue,
         fats: fatsValue,
-      };
+      }
 
       onSubmitFood(food);
 
@@ -46,7 +45,7 @@ export default function AddFoodForm({ onSubmitFood, onClose }) {
       setFormData(initialFormData);
 
       onClose();
-    }
+
   };
 
   const handleClose = (e) => {
@@ -78,8 +77,8 @@ export default function AddFoodForm({ onSubmitFood, onClose }) {
         <label className="block text-gray-700 font-semibold">Food Name</label>
         <input
           type="text"
-          name="foodName"
-          value={formData.foodName}
+          name="name"
+          value={formData.name}
           onChange={handleChange}
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="E.g. Peanut butter"
@@ -120,11 +119,11 @@ export default function AddFoodForm({ onSubmitFood, onClose }) {
           </label>
           <input
             type="number"
-            name="proteins"
-            value={formData.proteins}
+            name="protein"
+            value={formData.protein}
             onChange={handleChange}
             className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
-            placeholder="Enter proteins in grams"
+            placeholder="Enter protein in grams"
             required
           />
         </div>
@@ -134,8 +133,8 @@ export default function AddFoodForm({ onSubmitFood, onClose }) {
           </label>
           <input
             type="number"
-            name="carbohydrates"
-            value={formData.carbohydrates}
+            name="carbs"
+            value={formData.carbs}
             onChange={handleChange}
             className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
             placeholder="Enter carbs in grams"

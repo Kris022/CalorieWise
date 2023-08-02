@@ -20,12 +20,18 @@ export default function DashboardPage() {
   const [foodFormVisible, setFoodFormVisible] = useState(false); // Change to quick log form?
   const [totalMacros, setTotalMacros] = useState([]);
   const [selectedDate, setSelectedDate] = useState(getCurrentDate());
+  const [foodCardIndex, setFoodCardIndex] = useState(-1);
 
 
   // Toggles modal visiblity
   const toggleModal = () => {
     setFoodFormVisible(!foodFormVisible);
   };
+
+  const closeModal = () => {
+    setFoodFormVisible(false);
+    setFoodCardIndex(-1);
+  }
 
   // updates the local foods data and total macros state
   const updateLocalFoodData = (data) => {
@@ -54,36 +60,42 @@ export default function DashboardPage() {
   const fetchFoodForToday = async () => {
     const currentDate = selectedDate;
 
-    try {
-      const res = await fetch(`${BASE_URL}api/foods/${currentDate}`); // Assuming the backend endpoint is /api/foods
-      const data = await res.json();
+    const res = await fetch(`${BASE_URL}api/foods/${currentDate}`); // Assuming the backend endpoint is /api/foods
+    const data = await res.json();
 
+    if (res.ok) {
       updateLocalFoodData(data);
-
-    } catch (error) {
-      console.error("Error fetching food for today:", error);
+    }
+    if (!res.ok) {
+      console.error("Error fetching food for today:", data.error);
     }
   };
 
   // Logs food to the database
   const submitFood = async (food) => {
-    const res = await fetch(`${BASE_URL}api/foods/`, {
-      method: "POST",
-      body: JSON.stringify(food),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // POST if no food selected for edit
+    if (foodCardIndex == -1) {
+      const res = await fetch(`${BASE_URL}api/foods/`, {
+        method: "POST",
+        body: JSON.stringify(food),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const json = await res.json();
+      const json = await res.json();
 
-    if (!res.ok) {
-      console.log(json);
+      if (!res.ok) {
+        console.log(json);
+      }
+
+      if (res.ok) {
+        fetchFoodForToday();
+      }
     }
 
-    if (res.ok) {
-      fetchFoodForToday();
-    }
+    // Otherwise patch
+
   };
 
   // Logs food to the database
@@ -115,12 +127,18 @@ export default function DashboardPage() {
 
   return (
     <div className=" w-full h-[91vh] top-[60px]">
+
+      {/* Quick Log Modal */}
       <div className={foodFormVisible ? "block" : "hidden"}>
-        <Modal handleClose={toggleModal}>
-          <AddFoodForm onSubmitFood={submitFood} onClose={toggleModal} />
+        <Modal handleClose={closeModal}>
+          <AddFoodForm
+            foodCardIndex={foodCardIndex}
+            foodsData={foodsData}
+            onSubmitFood={submitFood}
+            visible={foodFormVisible}
+            onClose={closeModal} />
         </Modal>
       </div>
-
 
       {/* Page wrapper */}
       <motion.div
@@ -131,9 +149,9 @@ export default function DashboardPage() {
       >
         {/* Page title */}
         <motion.div
-          initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-          animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-          transition={{ duration: 0.5 }} // Animation duration
+          initial={{ scale: 0, opacity: 0 }} 
+          animate={{ scale: 1, opacity: 1 }} 
+          transition={{ duration: 0.5 }} 
           className="hidden sm:block sm:p-4"
         >
           <h2 className="text-gray-900 text-xl ">Analytics</h2>
@@ -141,31 +159,31 @@ export default function DashboardPage() {
 
         {/* Section 1 contents wraper */}
         <motion.div
-          initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-          animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-          transition={{ duration: 0.5 }} // Animation duration
+          initial={{ scale: 0, opacity: 0 }} 
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }} 
           className="flex flex-col sm:flex-row"
         >
           <motion.div
-            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ scale: 0, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ duration: 0.5 }}
             className="p-1"
           >
             <CalorieSummary calories={totalMacros.calories} />
           </motion.div>
           <motion.div
-            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ duration: 0.5 }} 
             className="p-1"
           >
             <MacroSummary macros={totalMacros} />
           </motion.div>
           <motion.div
-            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ scale: 0, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ duration: 0.5 }} 
             className="flex-1 p-1"
           >
             {/* Goal heatmap */}
@@ -175,13 +193,13 @@ export default function DashboardPage() {
 
           {/* Quick Log Button */}
           <motion.div
-            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ scale: 0, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ duration: 0.5 }} 
             className="sm:hidden"
           >
             <motion.button
-              onClick={toggleModal}
+              onClick={() => setFoodFormVisible(true)}
               className="bg-green-600 text-white w-full px-2 py-3 text-2xl rounded-md font-semibold"
             >
               Quick Log
@@ -191,27 +209,27 @@ export default function DashboardPage() {
 
         {/* Section 2 wrapper */}
         <motion.div
-          initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-          animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-          transition={{ duration: 0.5 }} // Animation duration
+          initial={{ scale: 0, opacity: 0 }} 
+          animate={{ scale: 1, opacity: 1 }} 
+          transition={{ duration: 0.5 }} 
           className="hidden sm:flex border-red-700 p-2 mt-4"
         >
           <motion.div
-            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ duration: 0.5 }} 
             className="flex-1"
           >
             <div>
               <h2 className="text-xl  mb-4">What you ate today:</h2>
             </div>
-            <FoodBrowser foodsData={foodsData} deleteFood={deleteFood} />
+            <FoodBrowser toggleModal={() => setFoodFormVisible(true)} setFoodCardIndex={setFoodCardIndex} foodsData={foodsData} deleteFood={deleteFood} />
           </motion.div>
 
           <motion.div
-            initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-            animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ scale: 0, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ duration: 0.5 }} 
             className="flex-1"
           >
             <div>
@@ -224,12 +242,12 @@ export default function DashboardPage() {
             {/* Quick Log Button */}
             <motion.div
               className="sm:block"
-              initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
-              animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
-              transition={{ duration: 0.5 }} // Animation duration
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }} 
             >
               <motion.button
-                onClick={toggleModal}
+                onClick={() => setFoodFormVisible(true)}
                 className="bg-green-600 text-white w-full px-2 py-3 text-2xl rounded-md font-semibold"
               >
                 Quick Log

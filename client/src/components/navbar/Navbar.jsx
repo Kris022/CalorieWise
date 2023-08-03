@@ -15,7 +15,11 @@ const Navbar = () => {
         <div className="hidden sm:flex h-full">
           <ul className="flex items-center">
             <li className="h-full flex items-center cursor-pointer hover:bg-green-700">Login</li>
-            <li className="h-full flex items-center cursor-pointer hover:bg-green-700">Signup</li>
+
+            <Link className="h-full flex items-center cursor-pointer hover:bg-green-700" to="/signup">
+              <li>Signup</li>
+            </Link>
+            
           </ul>
         </div>
       </div>

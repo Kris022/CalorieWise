@@ -1,7 +1,17 @@
+import React, { useState } from 'react';
+
 export default function SignupForm({ onSignup }) {
+  const initialUserData = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  const [userData, setUserData] = useState(initialUserData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignup();
+    onSignup(userData);
   };
 
   return (
@@ -34,6 +44,10 @@ export default function SignupForm({ onSignup }) {
             id="email"
             type="email"
             placeholder="johndoe@example.com"
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
           />
         </div>
         <div className="mb-4">
@@ -48,6 +62,10 @@ export default function SignupForm({ onSignup }) {
             id="password"
             type="password"
             placeholder="********"
+            value={userData.password}
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
           />
         </div>
         <div className="mb-6">

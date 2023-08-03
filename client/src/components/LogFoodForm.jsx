@@ -3,7 +3,7 @@ import { getCurrentDate } from "../utils/utils";
 
 export default function AddFoodForm({ foodsData, foodCardIndex, onSubmitFood, onClose, visible }) {
   const initialFormData = {
-    id: 0,
+    _id: 0,
     name: "",
     calories: "",
     amount: "",
@@ -16,6 +16,8 @@ export default function AddFoodForm({ foodsData, foodCardIndex, onSubmitFood, on
 
   useEffect(() => {
     if (foodCardIndex != -1) {
+      console.log(foodCardIndex)
+      console.log(foodsData[foodCardIndex])
       setFormData(foodsData[foodCardIndex]);
     } else {
       setFormData(initialFormData);
@@ -30,13 +32,14 @@ export default function AddFoodForm({ foodsData, foodCardIndex, onSubmitFood, on
       const curDate = getCurrentDate();
 
       const food = {
+        _id: formData._id, 
         name: formData.name,
-        calories: caloriesValue,
+        calories: formData.calories,
         date: curDate,
-        amount: amountValue,
-        protein: proteinsValue,
-        carbs: carbohydratesValue,
-        fats: fatsValue,
+        amount: formData.amount,
+        protein: formData.protein,
+        carbs: formData.carbs,
+        fats: formData.fats,
       }
 
       onSubmitFood(food);
@@ -70,7 +73,7 @@ export default function AddFoodForm({ foodsData, foodCardIndex, onSubmitFood, on
       </div> */}
       <div className="flex justify-between">
         <h2 className="text-xl font-semibold">Log Calories</h2>
-        <button onClick={handleClose}>Close</button>
+        <button type="button" onClick={handleClose}>Close</button>
       </div>
 
       <div className="mb-4">

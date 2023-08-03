@@ -25,7 +25,7 @@ router.get("/:date", getFoodsByDate);
 router.post("/", createFood);
 
 // PUT updates a specific food by its ID
-router.put("/:foodId", updateFood);
+router.patch("/:foodId", updateFood);
 
 // DELETE a specific food by its ID
 router.delete("/:foodId", deleteFood);

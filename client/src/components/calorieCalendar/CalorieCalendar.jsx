@@ -2,7 +2,7 @@ import React from "react";
 
 const calorieData = [
   { date: "2023-07-01", calories: 1800, goal: 2000 },
-  { date: "2023-07-02", calories: 1900, goal: 2000 },
+  { date: "2023-07-02", calories: 1800, goal: 2000 },
   // Add more calorie data for the month...
 ];
 
@@ -38,7 +38,7 @@ const CalorieCalendar = ({ setSelectedDate }) => {
           return (
             <div
               key={date}
-              className={`cursor-pointer flex items-center justify-center rounded-full h-12 w-12 text-center text-white font-semibold ${calorieColor}`}
+              className={`cursor-pointer flex items-center justify-center rounded-md h-12 w-12 text-center text-white font-semibold ${calorieColor}`}
               onClick={() => handleClick(date)}
             >
               {getDay(date)}

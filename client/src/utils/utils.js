@@ -1,6 +1,6 @@
 // Calculates the sum for fetched food data
 export const calculateSum = (property, data) => {
-  const sum = data.reduce((acc, food) => acc + food[property], 0);
+  const sum = data.reduce((acc, food) => acc + food[property], 0); // round to 1 decimal place
   return sum;
 };
 

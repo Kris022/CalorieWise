@@ -71,19 +71,12 @@ const updateFood = async (req, res) => {
     return res.status(400).json({ error: "Invalid food ID." });
   }
 
-  try {
-    const updatedFood = await Food.findByIdAndUpdate(
-      foodId,
-      { ...req.body },
-      { new: true }
-    );
-    if (!updatedFood) {
-      return res.status(404).json({ error: "Food not found." });
-    }
-    res.status(200).json(updatedFood);
-  } catch (error) {
-    res.status(500).json({ error: "Error occurred while updating the food." });
+  const updatedFood = await Food.findByIdAndUpdate(foodId, { ...req.body });
+
+  if (!updatedFood) {
+    return res.status(404).json({ error: "Food not found." });
   }
+  res.status(200).json(updatedFood);
 };
 
 const deleteFood = async (req, res) => {

@@ -5,7 +5,7 @@ export default function SignupForm({ onSignup }) {
   };
 
   return (
-    <div className="card w-full mt-8">
+    <div className="card w-full">
       <h2 className="text-3xl font-semibold text-center mb-6">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

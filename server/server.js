@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 
 const foodRoutes = require("./routes/foodRoute");
+const userRoutes = require("./routes/userRoute");
 
 // ------------------------ Middleware ------------------------ \\
 app.use(cors());
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 
 // ------------------------ Routes ------------------------ \\
 app.use("/api/foods", foodRoutes);
+app.use("/api/user", userRoutes);
 
 // ------------------------ Connection ------------------------ \\
 mongoose

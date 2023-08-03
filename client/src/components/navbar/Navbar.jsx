@@ -8,14 +8,14 @@ const Navbar = () => {
     <div className="text-white bg-green-600 w-full h-[60px]">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-full">
         {/* Logo */}
-        <div>
+        <div className="cursor-pointer">
           <h1 className="text-3xl">CalorieWise</h1>
         </div>
         {/* Login */}
         <div className="hidden sm:flex h-full">
           <ul className="flex items-center">
             <li className="h-full flex items-center cursor-pointer hover:bg-green-700">Login</li>
-            <li className="cursor-pointer">Signup</li>
+            <li className="h-full flex items-center cursor-pointer hover:bg-green-700">Signup</li>
           </ul>
         </div>
       </div>

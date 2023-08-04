@@ -4,6 +4,7 @@ import SignupForm from "../components/userForms/SignupForm";
 import MacroGoalsForm from "../components/userForms/MacroGoalsForm";
 
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
 
 import { motion } from "framer-motion";
 
@@ -18,6 +19,8 @@ export default function SignupPage() {
     sugarGoal: "",
   };
 
+  const { signup, isLoading, error } = useSignup();
+
   const [newUser, setNewUser] = useState(initalUserData);
   const [showConfirmMacrosForm, setShowConfirmMacrosForm] = useState(false);
   const navigate = useNavigate();
@@ -29,18 +32,14 @@ export default function SignupPage() {
     setShowConfirmMacrosForm(true);
   };
 
-  const handleMacroGoalsFormSubmit = (data) => {
+  const handleMacroGoalsFormSubmit = async (data) => {
     // Make SURE that data has the same fields as initalUserData
     setNewUser({ ...newUser, ...data });
 
-    console.log(newUser);
+    await signup(newUser);
     // if signup succesfull go to /dashboard
     // navigate("/dashboard");
   };
-
-  const submitData = async (data) => {
-	
-  }
 
   return (
     <div className="max-w-7xl mx-auto h-[91vh]">
@@ -57,6 +56,8 @@ export default function SignupPage() {
               <MacroGoalsForm onSubmit={handleMacroGoalsFormSubmit} />
             </div>
           )}
+
+          {error && <div>{error}</div>}
         </div>
       </div>
     </div>

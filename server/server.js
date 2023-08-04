@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 
 // ------------------------ Routes ------------------------ \\
 app.use("/api/foods", foodRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
 
 // ------------------------ Connection ------------------------ \\
 mongoose

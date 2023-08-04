@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 export default function MacroGoalsForm({ onSubmit }) {
   const initialUserData = {
-    calorieGoal: 0,
-    carbGoal: 0,
-    fatGoal: 0,
-    proteinGoal: 0,
-    sugarGoal: 0,
+    calorieGoal: "",
+    carbGoal: "",
+    fatGoal: "",
+    proteinGoal: "",
+    sugarGoal: "",
   };
 
   const [userData, setUserData] = useState(initialUserData);

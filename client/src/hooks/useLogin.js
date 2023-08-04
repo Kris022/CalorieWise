@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../reducers/authSlice";
 
-export const useSignup = () => {
+export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
-  const signup = async (newUser) => {
+  const login = async (newUser) => {
     setIsLoading(true);
     setError(null);
 
     const res = await fetch(
-      `${import.meta.env.VITE_BASE_URL}api/users/signup`,
+      `${import.meta.env.VITE_BASE_URL}api/users/login`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,5 +40,5 @@ export const useSignup = () => {
     }
   };
 
-  return { signup, isLoading, error };
+  return { login, isLoading, error };
 };

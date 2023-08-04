@@ -49,7 +49,7 @@ export default function MacroGoalsForm({ onSubmit }) {
           }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your protein goal"
-          required
+          
         />
       </div>
       <div className="mb-4">
@@ -64,7 +64,7 @@ export default function MacroGoalsForm({ onSubmit }) {
           }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your carbohydrate goal"
-          required
+          
         />
       </div>
       <div className="mb-4">
@@ -79,7 +79,7 @@ export default function MacroGoalsForm({ onSubmit }) {
           }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your fat goal"
-          required
+          
         />
       </div>
       <div className="flex justify-center">

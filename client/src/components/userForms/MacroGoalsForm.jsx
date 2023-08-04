@@ -1,29 +1,20 @@
 import React, { useState } from "react";
 
 export default function MacroGoalsForm({ onSubmit }) {
-  const [caloricGoal, setCaloricGoal] = useState("");
-  const [proteinGoal, setProteinGoal] = useState("");
-  const [carbohydrateGoal, setCarbohydrateGoal] = useState("");
-  const [fatGoal, setFatGoal] = useState("");
+  const initialUserData = {
+    calorieGoal: 0,
+    carbGoal: 0,
+    fatGoal: 0,
+    proteinGoal: 0,
+    sugarGoal: 0,
+  };
+
+  const [userData, setUserData] = useState(initialUserData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Convert the input values to numbers
-    const caloricGoalValue = parseInt(caloricGoal, 10);
-    const proteinGoalValue = parseInt(proteinGoal, 10);
-    const carbohydrateGoalValue = parseInt(carbohydrateGoal, 10);
-    const fatGoalValue = parseInt(fatGoal, 10);
 
-    // Create an object with the user's caloric goal and macros
-    const userGoals = {
-      caloricGoal: caloricGoalValue,
-      proteinGoal: proteinGoalValue,
-      carbohydrateGoal: carbohydrateGoalValue,
-      fatGoal: fatGoalValue,
-    };
-
-    // Call the onSubmit function from the parent component with the user's goals
-    onSubmit();
+    onSubmit(userData);
   };
 
   return (
@@ -37,8 +28,10 @@ export default function MacroGoalsForm({ onSubmit }) {
         </label>
         <input
           type="number"
-          value={caloricGoal}
-          onChange={(e) => setCaloricGoal(e.target.value)}
+          value={userData.calorieGoal}
+          onChange={(e) =>
+            setUserData({ ...userData, calorieGoal: e.target.value })
+          }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your caloric goal"
           required
@@ -50,8 +43,10 @@ export default function MacroGoalsForm({ onSubmit }) {
         </label>
         <input
           type="number"
-          value={proteinGoal}
-          onChange={(e) => setProteinGoal(e.target.value)}
+          value={userData.proteinGoal}
+          onChange={(e) =>
+            setUserData({ ...userData, proteinGoal: e.target.value })
+          }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your protein goal"
           required
@@ -63,8 +58,10 @@ export default function MacroGoalsForm({ onSubmit }) {
         </label>
         <input
           type="number"
-          value={carbohydrateGoal}
-          onChange={(e) => setCarbohydrateGoal(e.target.value)}
+          value={userData.carbGoal}
+          onChange={(e) =>
+            setUserData({ ...userData, carbGoal: e.target.value })
+          }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your carbohydrate goal"
           required
@@ -76,8 +73,10 @@ export default function MacroGoalsForm({ onSubmit }) {
         </label>
         <input
           type="number"
-          value={fatGoal}
-          onChange={(e) => setFatGoal(e.target.value)}
+          value={userData.fatGoal}
+          onChange={(e) =>
+            setUserData({ ...userData, fatGoal: e.target.value })
+          }
           className="block w-full mt-1 px-4 py-2 border rounded-md focus:ring focus:ring-green-500 focus:outline-none"
           placeholder="Enter your fat goal"
           required

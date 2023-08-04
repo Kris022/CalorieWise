@@ -11,11 +11,11 @@ export default function SignupPage() {
   const initalUserData = {
     email: "",
     password: "",
-    calorieGoal: 0,
-    carbGoal: 0,
-    fatGoal: 0,
-    proteinGoal: 0,
-    sugarGoal: 0,
+    calorieGoal: "",
+    carbGoal: "",
+    fatGoal: "",
+    proteinGoal: "",
+    sugarGoal: "",
   };
 
   const [newUser, setNewUser] = useState(initalUserData);
@@ -30,12 +30,17 @@ export default function SignupPage() {
   };
 
   const handleMacroGoalsFormSubmit = (data) => {
-	// Make SURE that data has the same fields as initalUserData
-    setNewUser({...newUser, ...data})
+    // Make SURE that data has the same fields as initalUserData
+    setNewUser({ ...newUser, ...data });
 
+    console.log(newUser);
     // if signup succesfull go to /dashboard
-    navigate("/dashboard");
+    // navigate("/dashboard");
   };
+
+  const submitData = async (data) => {
+	
+  }
 
   return (
     <div className="max-w-7xl mx-auto h-[91vh]">

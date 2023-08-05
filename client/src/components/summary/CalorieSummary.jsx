@@ -19,7 +19,7 @@ export default function CalorieSummary({ calories }) {
         <div style={{ width: 130 }}>
           <CircularProgressbar
             value={percentage}
-            text={`${remainingCalories} kcal`}
+            text={`${dailyCalories} kcal`}
             styles={buildStyles({
               textSize: "14px",
               // Colors
@@ -36,8 +36,8 @@ export default function CalorieSummary({ calories }) {
         <h2 className="text-center sm:text-left font-semibold">Calorie Summary</h2>
         <div className="mt-2 text-center sm:text-left text-gray-700">
           <p>Caloric Goal: {calorieGoal} kcal</p>
-          <p>Calories Consumed: {dailyCalories} kcal</p>
           <p>Calories Left: {remainingCalories} kcal</p>
+          <p>Calories Consumed: {dailyCalories} kcal</p>
         </div>
       </div>
     </div>

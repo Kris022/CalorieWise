@@ -1,5 +1,5 @@
 import React from "react";
-import FoodCard from "./foodCard/FoodCard";
+import FoodCard from "./FoodCard";
 
 
 const FoodBrowser = ({ foodsData, deleteFood, setFoodCardIndex, toggleModal }) => {

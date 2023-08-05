@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import SignupForm from "../components/userForms/SignupForm";
 import MacroGoalsForm from "../components/userForms/MacroGoalsForm";
 
-import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 
 import { motion } from "framer-motion";
@@ -23,7 +22,6 @@ export default function SignupPage() {
 
   const [newUser, setNewUser] = useState(initalUserData);
   const [showConfirmMacrosForm, setShowConfirmMacrosForm] = useState(false);
-  const navigate = useNavigate();
 
   // Handles submit of the signup form
   const handleSignupFormSubmit = (data) => {
@@ -37,8 +35,6 @@ export default function SignupPage() {
     setNewUser({ ...newUser, ...data });
 
     await signup(newUser);
-    // if signup succesfull go to /dashboard
-    // navigate("/dashboard");
   };
 
   return (

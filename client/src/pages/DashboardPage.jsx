@@ -88,6 +88,7 @@ export default function DashboardPage() {
         body: JSON.stringify(food),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.user.token}`,
         },
       });
 
@@ -108,6 +109,7 @@ export default function DashboardPage() {
           body: JSON.stringify(food),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.user.token}`,
           },
         }
       );
@@ -132,6 +134,7 @@ export default function DashboardPage() {
         body: JSON.stringify(food),
         headers: {
           "Content-Type": "application/json",
+		  Authorization: `Bearer ${auth.user.token}`,
         },
       }
     );

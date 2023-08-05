@@ -7,6 +7,8 @@ const getAllFoods = async (req, res) => {
 };
 
 const getFoodsByDate = async (req, res) => {
+  const user_id = req.user._id;
+  
   const dateString = req.params.date;
   const date = new Date(dateString);
 
@@ -16,6 +18,7 @@ const getFoodsByDate = async (req, res) => {
     nextDay.setDate(date.getDate() + 1);
 
     const foods = await Food.find({
+      user_id,
       date: {
         $gte: date,
         $lt: nextDay,
@@ -49,6 +52,8 @@ const createFood = async (req, res) => {
   const { name, calories, date, amount, protein, carbs, fats } = req.body;
 
   try {
+    const user_id = req.user._id;
+
     const food = await Food.create({
       name,
       calories,
@@ -57,6 +62,7 @@ const createFood = async (req, res) => {
       protein,
       carbs,
       fats,
+      user_id,
     });
     res.status(201).json(food);
   } catch (error) {
@@ -65,6 +71,8 @@ const createFood = async (req, res) => {
 };
 
 const updateFood = async (req, res) => {
+  // Do not update date
+
   const { foodId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(foodId)) {

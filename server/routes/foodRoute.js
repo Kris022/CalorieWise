@@ -1,8 +1,4 @@
 const express = require("express");
-const router = express.Router();
-
-const requireAuth = require("../middleware/requireAuth");
-
 const {
   getAllFoods,
   getFoodById,
@@ -11,6 +7,10 @@ const {
   deleteFood,
   getFoodsByDate,
 } = require("../controllers/foodController");
+
+const requireAuth = require("../middleware/requireAuth");
+
+const router = express.Router();
 
 // Requires valid user to use the food routes
 router.use(requireAuth);

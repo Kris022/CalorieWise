@@ -28,7 +28,6 @@ export const useLogin = () => {
       setError(json.error);
     }
     if (res.ok) {
-      console.log(json);
       // save user token in local storage
       localStorage.setItem("user", JSON.stringify(json));
 

@@ -29,6 +29,10 @@ const foodSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  user_id: {
+    type: String,
+    required: true,
+  },
 });
 
 // Create the Food model using the schema

@@ -10,52 +10,53 @@ export const calculateSum = (property, data) => {
   return sum;
 };
 
-export const getDay = (dt) => {
-  const day = new Date(dt)
-    .toLocaleString("en-us", { weekday: "long" })
-    .slice(0, 3);
-  return day;
+export const getDay = (dateString) => {
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const date = new Date(dateString + "T00:00:00");
+  const dayOfWeekIndex = date.getDay();
+  return daysOfWeek[dayOfWeekIndex];
 };
 
-// Returns current date
-export const getCurrentDate = () => {
-  const dateObj = new Date();
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
+
+
+
+
+export function getCurrentDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
   return `${year}-${month}-${day}`;
-};
+}
 
-// Get the previous 7 days from provided day
-export const getPreviousSevenDays = (inputDate) => {
-  const date = new Date(inputDate);
-  const previousDays = [];
+// Function to get an array of the previous days from a given date
+export function getPreviousDays(date, daysToLoad = 7) {
+  const result = [];
+  const currentDate = new Date(date);
 
-  for (let i = 0; i < 7; i++) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-indexed, so add 1 and pad with leading zero if needed
-    const day = String(date.getDate()).padStart(2, "0"); // Pad day with leading zero if needed
-    previousDays.push(`${year}-${month}-${day}`);
-    date.setDate(date.getDate() - 1); // Decrement the date by 1 day
+  for (let i = 0; i < daysToLoad; i++) {
+    currentDate.setDate(currentDate.getDate() - 1);
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    result.unshift(`${year}-${month}-${day}`);
   }
 
-  return previousDays.reverse();
-};
+  return result;
+}
 
-export const getDatesForMonth = (inputDate) => {
-  const [year, month, day] = inputDate.split('-').map(Number);
-  const firstDay = new Date(year, month - 1, 1); // Month is 0-indexed, so subtract 1
-  const lastDay = new Date(year, month, 0);
+// Function to get an array of the next days from a given date
+export function getNextDays(date, daysToLoad = 7) {
+  const result = [];
+  const currentDate = new Date(date);
 
-  const dates = [];
-  const currentDate = new Date(firstDay);
-
-  while (currentDate <= lastDay) {
-    const date = currentDate.getDate();
-    const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
-    dates.push(formattedDate);
+  for (let i = 0; i < daysToLoad; i++) {
     currentDate.setDate(currentDate.getDate() + 1);
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    result.push(`${year}-${month}-${day}`);
   }
 
-  return dates;
+  return result;
 }

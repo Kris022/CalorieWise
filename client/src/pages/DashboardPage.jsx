@@ -134,7 +134,7 @@ export default function DashboardPage() {
         body: JSON.stringify(food),
         headers: {
           "Content-Type": "application/json",
-		  Authorization: `Bearer ${auth.user.token}`,
+          Authorization: `Bearer ${auth.user.token}`,
         },
       }
     );
@@ -177,12 +177,15 @@ export default function DashboardPage() {
       </div>
 
       {/* Page wrapper */}
+      
+
       <motion.div
         initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
         animate={{ scale: 1, opacity: 1 }} // Animation target scale and opacity values
         transition={{ duration: 0.5 }} // Animation duration
         className="max-w-7xl mx-auto p-4"
       >
+        
         {/* Page title */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -254,7 +257,7 @@ export default function DashboardPage() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex-1"
+            className="flex-1 p-1"
           >
             <div>
               <h2 className="text-xl  mb-4">What you ate</h2>
@@ -271,19 +274,19 @@ export default function DashboardPage() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex-1"
+            className="flex-1 flex flex-col p-1"
           >
             <div>
-              <h2 className="text-xl  mb-4">Selected: {selectedDate}</h2>
+              <h2 className="text-xl mb-4">Selected: {selectedDate}</h2>
             </div>
 
             {/* <CalorieCalendar /> */}
-            <div>
+            <div className="h-full">
               <CalorieCalendar setSelectedDate={setSelectedDate} />
             </div>
             {/* Quick Log Button */}
             <motion.div
-              className="sm:block"
+              className="sm:block mt-2"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -295,7 +298,9 @@ export default function DashboardPage() {
                 Quick Log
               </button>
             </motion.div>
+
           </motion.div>
+
         </motion.div>
       </motion.div>
     </div>

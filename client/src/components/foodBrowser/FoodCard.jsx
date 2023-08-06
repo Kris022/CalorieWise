@@ -14,12 +14,17 @@ const FoodCard = ({ food, index, setFoodCardIndex, deleteFood, toggleModal }) =>
         <h3 className="text-xl font-semibold">{name}</h3>
         <div>
           <button
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
             onClick={handleClick}
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
-            Edit Food
+            Edit
           </button>
-          <button onClick={() => deleteFood(food)} className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">X</button>
+          <button 
+          onClick={() => deleteFood(food)} 
+          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 ml-1"
+          >
+            X
+          </button>
         </div>
       </div>
       <div className="flex justify-between">

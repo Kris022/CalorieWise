@@ -1,6 +1,7 @@
 import { FaWheatAwn } from "react-icons/fa6";
 import { MdEggAlt } from "react-icons/md";
 import { PiFishSimpleFill } from "react-icons/pi";
+import { GiWrappedSweet } from "react-icons/gi";
 
 export default function MacroSummary({ macros }) {
   return (
@@ -22,6 +23,10 @@ export default function MacroSummary({ macros }) {
               <p className="text-gray-700 font-semibold"> Fats</p>
               <PiFishSimpleFill className="text-gray-700 ml-2" />
             </div>
+            {/* <div className="flex items-center">
+              <p className="text-gray-700 font-semibold"> Sugar</p>
+              <GiWrappedSweet className="text-gray-700 ml-2" />
+            </div> */}
           </div>
 
           <div className="grid grid-cols-3 gap-4 mt-1">
@@ -34,6 +39,10 @@ export default function MacroSummary({ macros }) {
             <div>
               <p className="text-gray-700">{macros.fats} g</p>
             </div>
+
+            {/* <div>
+              <p className="text-gray-700">10 g</p>
+            </div> */}
           </div>
         </div>
       </div>

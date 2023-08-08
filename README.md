@@ -1,7 +1,6 @@
 # CalorieWise
 
 Try live at - https://calorie-wise.vercel.app/
-[Live Demo](https://calorie-wise.vercel.app/){:target="_blank"}
 
 CalorieWise is a health management app for tracking daily calorie intake and setting personalized goals. It offers intuitive data visualization and responsive design for easy usage.
 

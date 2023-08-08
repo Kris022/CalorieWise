@@ -16,5 +16,4 @@ https://github.com/Kris022/CalorieWise/assets/86967871/ec88e991-0092-4edf-a019-c
 
 ### Food editing and removing
 
-https://github.com/Kris022/CalorieWise/assets/86967871/93b9e9a9-2223-4202-8407-124a2d5945e0
-
+https://github.com/Kris022/CalorieWise/assets/86967871/0c39fcca-a221-40f4-bbf7-b29996b20d37

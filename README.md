@@ -12,8 +12,8 @@ CalorieWise is a health management app for tracking daily calorie intake and set
 
 ### User login and Food loging
 
-https://github.com/Kris022/CalorieWise/assets/86967871/ec88e991-0092-4edf-a019-c2cb4f1aa6a0
+https://github.com/Kris022/CalorieWise/assets/86967871/5ec7de7a-eabc-46a6-92fd-8f1e13d763a7
 
 ### Food editing and removing
 
-https://github.com/Kris022/CalorieWise/assets/86967871/0c39fcca-a221-40f4-bbf7-b29996b20d37
+https://github.com/Kris022/CalorieWise/assets/86967871/d61d8609-60b6-449f-bc8e-9a3e90af1e21

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Tooltip } from 'react-tooltip'
+import { Tooltip } from "react-tooltip";
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
@@ -16,15 +16,15 @@ import {
   getNextDays,
 } from "../../utils/utils";
 
-const CalorieCalendar = ({ setSelectedDate }) => {
+const CalorieCalendar = ({ setSelectedDate, daysToLoad = 7 }) => {
   const [calorieData, setCalorieData] = useState([
-    ...getPreviousDays(getCurrentDate()),
+    ...getPreviousDays(getCurrentDate(), daysToLoad),
   ]);
 
   const handleBackArrowClick = () => {
     const currentDate =
       calorieData.length > 0 ? calorieData[0] : getCurrentDate();
-    const previousDays = getPreviousDays(currentDate);
+    const previousDays = getPreviousDays(currentDate, daysToLoad);
     setCalorieData(previousDays);
   };
 
@@ -33,7 +33,7 @@ const CalorieCalendar = ({ setSelectedDate }) => {
       calorieData.length > 0
         ? calorieData[calorieData.length - 1]
         : getCurrentDate();
-    const nextDays = getNextDays(currentDate);
+    const nextDays = getNextDays(currentDate, daysToLoad);
     setCalorieData(nextDays);
   };
 
@@ -54,7 +54,7 @@ const CalorieCalendar = ({ setSelectedDate }) => {
   return (
     <div className="card h-full flex flex-col">
       <div className="max-w-3xl my-auto">
-        <div>
+        <div className="flex justify-between">
           <h2 className="text-xl font-semibold mb-4 ">Timeline</h2>
         </div>
 
@@ -77,8 +77,9 @@ const CalorieCalendar = ({ setSelectedDate }) => {
                   whileHover={{ scale: 1.2 }} // Scale up the cube on hover
                   className={`cursor-pointer flex items-center justify-center rounded-md h-12 w-12 text-center text-white font-semibold bg-green-500`}
                   onClick={() => handleClick(date)}
-
-                  data-tooltip-id="my-tooltip" data-tooltip-content={date} data-tooltip-place="bottom"
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={date}
+                  data-tooltip-place="bottom"
                 >
                   {getDay(date)}
                 </motion.div>

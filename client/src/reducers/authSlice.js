@@ -5,7 +5,7 @@ const initialState = {
 };
 
 // user is an object that has an email and token properties
-// user: {email: "", token: ""}
+// user: {email: "", token: "", calorieGoal}
 
 const authSlice = createSlice({
   name: "auth",

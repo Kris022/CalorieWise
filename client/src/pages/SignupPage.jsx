@@ -8,6 +8,11 @@ import { useSignup } from "../hooks/useSignup";
 import { motion } from "framer-motion";
 
 export default function SignupPage() {
+
+  // probabliy better to seperate them 
+  // since these are not using the same form anyway
+  // userSignupdata
+  // userGoalsData
   const initalUserData = {
     email: "",
     password: "",
@@ -35,6 +40,27 @@ export default function SignupPage() {
     setNewUser({ ...newUser, ...data });
 
     await signup(newUser);
+    await setUserGoals(data);
+
+    // console.log(newUser);
+  };
+
+  const setUserGoals = async (data) => {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}api/goals/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        newUser,
+      }),
+    });
+
+    const json = res.json();
+    if (!res.ok) {
+      console.log(error);
+    }
+    if (res.ok) {
+      console.log(json);
+    }
   };
 
   return (

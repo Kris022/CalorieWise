@@ -8,6 +8,8 @@ import MacroSummary from "../components/summary/MacroSummary";
 import CalorieCalendar from "../components/calorieCalendar/CalorieCalendar";
 
 import AddFoodForm from "../components/LogFoodForm";
+import MacroGoalsForm from "../components/userForms/MacroGoalsForm";
+
 import FoodBrowser from "../components/foodBrowser/FoodBrowser";
 
 import Modal from "../components/modal/Modal";
@@ -17,6 +19,7 @@ import { getCurrentDate, calculateSum } from "../utils/utils";
 export default function DashboardPage() {
   const [foodsData, setFoodsData] = useState([]);
   const [foodFormVisible, setFoodFormVisible] = useState(false); // Change to quick log form?
+  const [goalsFormVisible, setGoalsFormVisible] = useState(false); // Change to quick log form?
   const [totalMacros, setTotalMacros] = useState([]);
   const [selectedDate, setSelectedDate] = useState(getCurrentDate());
   const [foodCardIndex, setFoodCardIndex] = useState(-1);
@@ -150,9 +153,28 @@ export default function DashboardPage() {
     }
   };
 
-  useEffect(() => {
-    // fetchAllFoodData()
+  const setUserGoals = async (data) => {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}api/goals/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.user.token}`,
+      },
+      body: JSON.stringify({
+        data,
+      }),
+    });
 
+    const json = res.json();
+    if (!res.ok) {
+      console.log(error);
+    }
+    if (res.ok) {
+      console.log(json);
+    }
+  };
+
+  useEffect(() => {
     // Only attempt to fetch foods if user is logged in
     if (auth.user) {
       fetchFoodForToday();
@@ -162,7 +184,7 @@ export default function DashboardPage() {
   }, [selectedDate, auth.user]);
 
   return (
-    <div className=" w-full h-[91vh] top-[60px]">
+    <div className=" w-full h-full top-[60px]">
       {/* Quick Log Modal */}
       <div className={foodFormVisible ? "block" : "hidden"}>
         <Modal handleClose={closeModal}>
@@ -176,8 +198,13 @@ export default function DashboardPage() {
         </Modal>
       </div>
 
+      <div className={goalsFormVisible ? "block" : "hidden"}>
+        <Modal handleClose={() => setGoalsFormVisible(false)}>
+          <MacroGoalsForm onSubmit={setUserGoals} />
+        </Modal>
+      </div>
+
       {/* Page wrapper */}
-      
 
       <motion.div
         initial={{ scale: 0, opacity: 0 }} // Initial scale and opacity values
@@ -185,7 +212,6 @@ export default function DashboardPage() {
         transition={{ duration: 0.5 }} // Animation duration
         className="max-w-7xl mx-auto p-4"
       >
-        
         {/* Page title */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -203,11 +229,16 @@ export default function DashboardPage() {
           transition={{ duration: 0.5 }}
           className="flex flex-col sm:flex-row"
         >
+          <div className="h-full p-1 sm:hidden ">
+            <CalorieCalendar setSelectedDate={setSelectedDate} daysToLoad={4} />
+          </div>
+
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="p-1"
+            onClick={() => setGoalsFormVisible(true)}
           >
             <CalorieSummary calories={totalMacros.calories} />
           </motion.div>
@@ -227,7 +258,9 @@ export default function DashboardPage() {
           >
             {/* Goal heatmap */}
             {/* Calorie summary but weekly */}
-            <CalorieSummary />
+            <div className="hidden sm:block">
+              <CalorieSummary />
+            </div>
           </motion.div>
 
           {/* Quick Log Button */}
@@ -284,6 +317,7 @@ export default function DashboardPage() {
             <div className="h-full">
               <CalorieCalendar setSelectedDate={setSelectedDate} />
             </div>
+
             {/* Quick Log Button */}
             <motion.div
               className="sm:block mt-2"
@@ -298,9 +332,7 @@ export default function DashboardPage() {
                 Quick Log
               </button>
             </motion.div>
-
           </motion.div>
-
         </motion.div>
       </motion.div>
     </div>

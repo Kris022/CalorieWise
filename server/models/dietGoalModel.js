@@ -1,22 +1,14 @@
 const mongoose = require("mongoose");
 
-const dietTrackerSchema = new mongoose.Schema({
-  user: {
+const dietGoalSchema = new mongoose.Schema({
+  user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
-  },
-  date: {
-    type: Date,
     required: true,
   },
   caloricGoal: {
     type: Number,
     default: 2000, // Default caloric goal
-  },
-  totalCaloriesConsumed: {
-    type: Number,
-    default: 0,
   },
   carbGoal: {
     type: Number,
@@ -36,6 +28,6 @@ const dietTrackerSchema = new mongoose.Schema({
   },
 });
 
-const DietTracker = mongoose.model("DietTracker", dietTrackerSchema);
+const DietGoal = mongoose.model("DietGoal", dietGoalSchema);
 
-module.exports = DietTracker;
+module.exports = DietGoal;

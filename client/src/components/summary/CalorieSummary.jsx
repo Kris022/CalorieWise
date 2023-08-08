@@ -1,17 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setGoals } from "../../reducers/goalSlice";
+
 export default function CalorieSummary({ calories }) {
-  // Dummy data for calorie goal
-  const calorieGoal = 2000;
+  const dispatch = useDispatch();
+  // const goal = useSelector((state) => state.goal);
+
+  const user = useSelector((state) => state.auth.user);
+
+  const [calorieGoal, setCalorieGoal] = useState(2000);
+
+  const [loading, setLoading] = useState(true);
+
+  const fetchCalorieGoal = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}api/goals/`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const json = await res.json();
+      if (res.ok) {
+        dispatch(setGoals(json));
+        setCalorieGoal(json.caloricGoal);
+      } else {
+        setCalorieGoal(99);
+      }
+    } catch (error) {
+      // Handle error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCalorieGoal();
+  }, []);
 
   // Parse the prop to int
-  const dailyCalories = Number.isNaN(parseInt(calories)) ? 0 : parseInt(calories);
+  const dailyCalories = Number.isNaN(parseInt(calories))
+    ? 0
+    : parseInt(calories);
 
   // Calculate the remaining calories
   const remainingCalories = calorieGoal - dailyCalories;
   const percentage = Math.floor((dailyCalories / calorieGoal) * 100);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="sm:flex sm:justify-center rounded-lg shadow-md p-4 bg-white">
@@ -33,7 +75,9 @@ export default function CalorieSummary({ calories }) {
       </div>
 
       <div className="text-lg sm:text-base sm:flex sm:flex-col sm:justify-center sm:ml-4">
-        <h2 className="text-center sm:text-left font-semibold">Calorie Summary</h2>
+        <h2 className="text-center sm:text-left font-semibold">
+          Calorie Summary
+        </h2>
         <div className="mt-2 text-center sm:text-left text-gray-700">
           <p>Caloric Goal: {calorieGoal} kcal</p>
           <p>Calories Left: {remainingCalories} kcal</p>

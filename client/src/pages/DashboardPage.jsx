@@ -259,7 +259,7 @@ export default function DashboardPage() {
             {/* Goal heatmap */}
             {/* Calorie summary but weekly */}
             <div className="hidden sm:block">
-              <CalorieSummary />
+              <CalorieSummary weekly={true} calories={totalMacros.calories} />
             </div>
           </motion.div>
 

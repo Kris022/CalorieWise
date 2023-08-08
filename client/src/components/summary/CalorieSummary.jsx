@@ -5,9 +5,8 @@ import "react-circular-progressbar/dist/styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setGoals } from "../../reducers/goalSlice";
 
-export default function CalorieSummary({ calories }) {
+export default function CalorieSummary({ calories, weekly = false }) {
   const dispatch = useDispatch();
-  // const goal = useSelector((state) => state.goal);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -28,6 +27,10 @@ export default function CalorieSummary({ calories }) {
       if (res.ok) {
         dispatch(setGoals(json));
         setCalorieGoal(json.caloricGoal);
+
+        if (weekly) {
+          setCalorieGoal(json.caloricGoal * 7);
+        }
       } else {
         setCalorieGoal(99);
       }
@@ -76,7 +79,7 @@ export default function CalorieSummary({ calories }) {
 
       <div className="text-lg sm:text-base sm:flex sm:flex-col sm:justify-center sm:ml-4">
         <h2 className="text-center sm:text-left font-semibold">
-          Calorie Summary
+          {weekly && "Weekly"} Calorie Summary
         </h2>
         <div className="mt-2 text-center sm:text-left text-gray-700">
           <p>Caloric Goal: {calorieGoal} kcal</p>

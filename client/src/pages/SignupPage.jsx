@@ -7,9 +7,10 @@ import { useSignup } from "../hooks/useSignup";
 
 import { motion } from "framer-motion";
 
-export default function SignupPage() {
+import { useSelector } from "react-redux";
 
-  // probabliy better to seperate them 
+export default function SignupPage() {
+  // probabliy better to seperate them
   // since these are not using the same form anyway
   // userSignupdata
   // userGoalsData
@@ -40,15 +41,36 @@ export default function SignupPage() {
     setNewUser({ ...newUser, ...data });
 
     await signup(newUser);
-    await setUserGoals(data);
 
-    // console.log(newUser);
+    const auth = useSelector((state) => state.auth);
+
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}api/goals/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.user.token}`,
+      },
+      body: JSON.stringify({
+        newUser,
+      }),
+    });
+
+    const json = res.json();
+    if (!res.ok) {
+      console.log(error);
+    }
+    if (res.ok) {
+      console.log(json);
+    }
   };
 
   const setUserGoals = async (data) => {
     const res = await fetch(`${import.meta.env.VITE_BASE_URL}api/goals/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.user.token}`,
+      },
       body: JSON.stringify({
         newUser,
       }),

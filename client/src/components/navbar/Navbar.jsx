@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { useLogout } from "../../hooks/useLogout";
+import { useLogin } from "../../hooks/useLogin";
 
 import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
+
+  const { login } = useLogin();
+
+  const handleDemoLogin = async () => {
+    const demoEmail = "jane@mail";
+    const demoPassword = "jane123";
+    await login({ demoEmail, demoPassword });
+  };
 
   const { logout } = useLogout();
   const handleLogout = () => {
@@ -28,6 +37,13 @@ const Navbar = () => {
           <ul className="flex items-center">
             {!auth.user ? (
               <>
+                <div
+                  onClick={handleDemoLogin}
+                  className="h-full flex items-center cursor-pointer hover:bg-green-700"
+                >
+                  <li>Demo User</li>
+                </div>
+
                 <Link
                   to="/login"
                   className="h-full flex items-center cursor-pointer hover:bg-green-700"

@@ -1,26 +1,22 @@
-CalorieWise - Simple Calorie Counting Web and Mobile App
+# CalorieWise
 
-CalorieWise is a comprehensive health management application that helps users track their daily calorie intake, set personalized calorie goals, and manage their weight goals. With a user-friendly web interface and a React Native mobile app, CalorieWise allows seamless tracking and progress monitoring, making it easier to achieve a healthier lifestyle.
+Try live at - https://calorie-wise.vercel.app/
 
-Features:
-- Log your daily food intake and track the number of calories consumed.
-- Set personalized calorie goals based on your profile and weight objectives.
-- Visualize calorie intake over time with comprehensive reports and charts.
-- Record age, weight, height, activity level, and weight goal to customize the app for individual needs.
-- Seamless user experience with responsive web design and native mobile app.
+CalorieWise is a health management app for tracking daily calorie intake and setting personalized goals. It offers intuitive data visualization and responsive design for easy usage.
 
-Tech Stack:
-- Frontend: React.js (Web), React Native (Mobile), Tailwind CSS
-- Backend: Node.js (Express)
-- Database: MongoDB
+## Tech Stack:
 
-Web App:
-Soon to be deployed.
+- **Frontend:** React.js, Redux, Tailwind CSS
+- **Backend:** Node.js (Express)
+- **Database:** MongoDB, Mongoose
 
-To run the code
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
-4. Navigate to localhost
+# Demo
 
-Mobile App (Coming Soon)
+### User login and Food loging
+
+https://github.com/Kris022/CalorieWise/assets/86967871/57dcba4b-4501-4e50-8ce3-6ff2a1bf7920
+
+### Food editing and removing
+
+https://github.com/Kris022/CalorieWise/assets/86967871/31c36d7d-3d79-4e63-b16d-f68d6ec72a1d
+

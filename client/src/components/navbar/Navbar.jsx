@@ -10,12 +10,10 @@ import { FaUserCircle } from "react-icons/fa";
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
 
-  const { login } = useLogin();
+  const { login, isLoading, error } = useLogin();
 
   const handleDemoLogin = async () => {
-    const demoEmail = "jane@mail";
-    const demoPassword = "jane123";
-    await login({ demoEmail, demoPassword });
+    await login({ email: "jane@mail", password: "jane123" });
   };
 
   const { logout } = useLogout();

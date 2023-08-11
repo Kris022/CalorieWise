@@ -10,10 +10,8 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 export default function SignupPage() {
-  // probabliy better to seperate them
-  // since these are not using the same form anyway
-  // userSignupdata
-  // userGoalsData
+  const auth = useSelector((state) => state.auth);
+
   const initalUserData = {
     email: "",
     password: "",
@@ -42,7 +40,6 @@ export default function SignupPage() {
 
     await signup(newUser);
 
-    const auth = useSelector((state) => state.auth);
 
     const res = await fetch(`${import.meta.env.VITE_BASE_URL}api/goals/`, {
       method: "POST",
@@ -51,7 +48,7 @@ export default function SignupPage() {
         Authorization: `Bearer ${auth.user.token}`,
       },
       body: JSON.stringify({
-        newUser,
+        data,
       }),
     });
 
